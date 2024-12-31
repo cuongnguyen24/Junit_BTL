@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.swing.Action;
 import javax.swing.JOptionPane;
 
+import model.QLSVModel;
 import model.ThiSinh;
 import model.Tinh;
 import view.QLSVView;
@@ -19,6 +20,7 @@ public class QLSVController implements Action{
 	public QLSVController(QLSVView view) {
 		this.view = view;
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -89,5 +91,7 @@ public class QLSVController implements Action{
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }

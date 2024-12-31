@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -97,9 +98,13 @@ public class ThiSinh implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ThiSinh [maThiSinh=" + maThiSinh + ", tenThiSinh=" + tenThiSinh + ", queQuan=" + queQuan + ", ngaySinh="
-				+ ngaySinh + ", gioiTinh=" + gioiTinh + ", diemMon1=" + diemMon1 + ", diemMon2=" + diemMon2
-				+ ", diemMon3=" + diemMon3 + "]";
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//		return "ThiSinh [maThiSinh=" + maThiSinh + ", tenThiSinh=" + tenThiSinh + ", queQuan=" + queQuan + ", ngaySinh="
+//				+ ngaySinh + ", gioiTinh=" + gioiTinh + ", diemMon1=" + diemMon1 + ", diemMon2=" + diemMon2
+//				+ ", diemMon3=" + diemMon3 + "]";
+		return "ThiSinh [maThiSinh=" + maThiSinh + ", tenThiSinh=" + tenThiSinh + ", queQuan=" + queQuan.getTenTinh() + ", ngaySinh="
+		+ sdf.format(ngaySinh) + ", gioiTinh=" + gioiTinh + ", diemMon1=" + diemMon1 + ", diemMon2=" + diemMon2
+		+ ", diemMon3=" + diemMon3 + "]";
 	}
 
 	@Override

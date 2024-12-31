@@ -23,6 +23,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -83,9 +85,6 @@ public class QLSVView extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public QLSVView() {
 		this.model = new QLSVModel();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -373,14 +372,17 @@ public class QLSVView extends JFrame {
 		} else {
 			this.model.update(ts);
 			int soLuongDong = model_table.getRowCount();
+			 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			for (int i = 0; i < soLuongDong; i++) {
 				String id = model_table.getValueAt(i, 0) + "";
 				if (id.equals(ts.getMaThiSinh() + "")) {
 					model_table.setValueAt(ts.getMaThiSinh() + "", i, 0);
 					model_table.setValueAt(ts.getTenThiSinh() + "", i, 1);
 					model_table.setValueAt(ts.getQueQuan().getTenTinh() + "", i, 2);
-					model_table.setValueAt(ts.getNgaySinh().getDate() + "/" + (ts.getNgaySinh().getMonth() + 1) + "/"
-							+ (ts.getNgaySinh().getYear() + 1900) + "", i, 3);
+					
+					String ngaySinh = sdf.format(ts.getNgaySinh());
+	                model_table.setValueAt(ngaySinh, i, 3);
+	                
 					model_table.setValueAt((ts.isGioiTinh() ? "Nam" : "Nữ"), i, 4);
 					model_table.setValueAt(ts.getDiemMon1() + "", i, 5);
 					model_table.setValueAt(ts.getDiemMon2() + "", i, 6);
@@ -446,7 +448,16 @@ public class QLSVView extends JFrame {
 		String tenThiSinh = this.textField_HoVaTen.getText();
 		int queQuan = this.comboBox_queQuan.getSelectedIndex() - 1;
 		Tinh tinh = Tinh.getTinhById(queQuan);
-		Date ngaySinh = new Date(this.textField_NgaySinh.getText());
+		
+		String ngaySinhString = this.textField_NgaySinh.getText();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date ngaySinh = null;
+		try {
+	        ngaySinh = sdf.parse(ngaySinhString); // Chuyển đổi chuỗi thành đối tượng Date
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	    }
+		
 		boolean gioiTinh = true;
 		if (this.radioButton_nam.isSelected()) {
 			gioiTinh = true;

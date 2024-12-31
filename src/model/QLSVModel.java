@@ -61,6 +61,17 @@ public class QLSVModel {
 		}
 		return false;
 	}
+
+	public ThiSinh getThiSinhById(int id) {
+	    // Duyệt qua tất cả các thí sinh trong danh sách để tìm thí sinh theo ID
+	    for (ThiSinh ts : this.dsThiSinh) {
+	        if (ts.getMaThiSinh() == id) {
+	            return ts;  // Trả về thí sinh nếu tìm thấy
+	        }
+	    }
+	    return null;  // Trả về null nếu không tìm thấy thí sinh có ID tương ứng
+	}
+
 	
 	
 }
