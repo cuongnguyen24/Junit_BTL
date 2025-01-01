@@ -15,12 +15,15 @@ import view.QLSVView;
 
 public class QLSVController implements Action{
 	public QLSVView view;
-	
+	private JOptionPane optionPane = new JOptionPane();
 	
 	public QLSVController(QLSVView view) {
 		this.view = view;
 	}
-
+	
+	public void setOptionPane(JOptionPane mockOptionPane) {
+	    this.optionPane = mockOptionPane;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

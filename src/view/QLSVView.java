@@ -438,6 +438,8 @@ public class QLSVView extends JFrame {
 			ThiSinh ts = getThiSinhDangChon();
 			this.model.delete(ts);
 			model_table.removeRow(i_row);
+			
+			//JOptionPane.showMessageDialog(this, "Xóa thí sinh thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 	}
