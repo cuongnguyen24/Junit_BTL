@@ -371,6 +371,7 @@ public class QLSVView extends JFrame {
 			this.themThiSinhVaoTable(ts);
 		} else {
 			this.model.update(ts);
+			
 			int soLuongDong = model_table.getRowCount();
 			 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			for (int i = 0; i < soLuongDong; i++) {
@@ -400,7 +401,13 @@ public class QLSVView extends JFrame {
 		String tenThiSinh = model_table.getValueAt(i_row, 1) + "";
 		Tinh tinh = Tinh.getTinhByTen(model_table.getValueAt(i_row, 2) + "");
 		String s_ngaySinh = model_table.getValueAt(i_row, 3) + "";
-		Date ngaySinh = new Date(s_ngaySinh);
+		 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		    Date ngaySinh = null;
+		    try {
+		        ngaySinh = sdf.parse(s_ngaySinh);
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
 		String textGioiTinh = model_table.getValueAt(i_row, 4) + "";
 		boolean gioiTinh = textGioiTinh.equals("Nam");
 		float diemMon1 = Float.valueOf(model_table.getValueAt(i_row, 5) + "");
@@ -413,12 +420,11 @@ public class QLSVView extends JFrame {
 
 	public void hienThiThongTinThiSinhDaChon() {
 		ThiSinh ts = getThiSinhDangChon();
-
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		this.textField_ID.setText(ts.getMaThiSinh() + "");
 		this.textField_HoVaTen.setText(ts.getTenThiSinh() + "");
 		this.comboBox_queQuan.setSelectedItem(ts.getQueQuan().getTenTinh());
-		String s_ngaySinh = ts.getNgaySinh().getDate() + "/" + (ts.getNgaySinh().getMonth() + 1) + "/"
-				+ (ts.getNgaySinh().getYear() + 1900);
+		String s_ngaySinh = sdf.format(ts.getNgaySinh());
 		this.textField_NgaySinh.setText(s_ngaySinh + "");
 		if (ts.isGioiTinh()) {
 			radioButton_nam.setSelected(true);

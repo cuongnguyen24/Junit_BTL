@@ -33,10 +33,19 @@ public class QLSVModel {
 		this.dsThiSinh.remove(thiSinh);
 	}
 	
-	public void update(ThiSinh thiSinh) {
-		this.dsThiSinh.remove(thiSinh);
-		this.dsThiSinh.add(thiSinh);
+//	public void update(ThiSinh thiSinh) {
+//		this.dsThiSinh.remove(thiSinh);
+//		this.dsThiSinh.add(thiSinh);
+//	}
+	public void update(ThiSinh ts) {
+	    for (int i = 0; i < dsThiSinh.size(); i++) {
+	        if (dsThiSinh.get(i).getMaThiSinh() == ts.getMaThiSinh()) {
+	        	dsThiSinh.set(i, ts); // Thay thế đối tượng bằng bản mới
+	            return; // Thoát khỏi vòng lặp sau khi cập nhật
+	        }
+	    }
 	}
+
 
 	public String getLuaChon() {
 		return luaChon;
