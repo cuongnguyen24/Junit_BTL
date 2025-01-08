@@ -28,32 +28,17 @@ class TestChucNang {
     
     @Test
     void testThemThiSinh(){
-    	
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
-    	// Thêm danh sách Tinh và chọn 1 Tinh
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("24/07/2004");
-    	// Chọn giới tính
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        // Điểm
-        view.textField_Mon1.setText("9.5");
-        view.textField_Mon2.setText("9.0");
-        view.textField_Mon3.setText("9.5");
-        
-        view.thucHienThemThiSinh();
-        
+    	themThiSinh();
         ThiSinh ts = view.model.getThiSinhById(1); // Giả sử có phương thức này để lấy theo ID
         System.out.println("--------------TEST THEM THI SINH---------------");
         System.out.println("Thông tin thí sinh:");
         hienThiThongTinThiSinh(ts);
-        
         ts = view.model.getThiSinhById(1); 
         assertNotNull(ts, "Thí sinh không được thêm vào model!");
         assertEquals("Nguyen Ba Cuong", ts.getTenThiSinh(), "Tên thí sinh không đúng!");
         assertEquals("Nghệ An", ts.getQueQuan().getTenTinh(), "Quê quán không đúng!");
-        assertEquals("24/07/2004", new SimpleDateFormat("dd/MM/yyyy").format(ts.getNgaySinh()), "Ngày sinh không đúng!");
+        assertEquals("24/07/2004", new SimpleDateFormat("dd/MM/yyyy").format(ts.getNgaySinh()),
+        		"Ngày sinh không đúng!");
         assertTrue(ts.isGioiTinh(), "Giới tính không đúng!");
         assertEquals(9.5f, ts.getDiemMon1(), "Điểm môn 1 không đúng!");
         assertEquals(9.0f, ts.getDiemMon2(), "Điểm môn 2 không đúng!");
@@ -62,58 +47,27 @@ class TestChucNang {
     
     @Test
     void testCapNhat() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
-    	// Thêm danh sách Tinh và chọn 1 Tinh
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("24/07/2004");
-    	// Chọn giới tính
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        // Điểm
-        view.textField_Mon1.setText("9");
-        view.textField_Mon2.setText("9");
-        view.textField_Mon3.setText("9.5");
-        view.thucHienThemThiSinh();
-        
+    	themThiSinh();
         ThiSinh ts = view.model.getThiSinhById(1);
         System.out.println("--------------TEST CAP NHAT---------------");
         System.out.println("Thông tin thí sinh trước khi cập nhật:");
         hienThiThongTinThiSinh(ts);
-        
         view.table.setRowSelectionInterval(0, 0);
         view.hienThiThongTinThiSinhDaChon();
-        
-        // update du lieu
         view.textField_HoVaTen.setText("Nguyen Van A");
         view.textField_Mon1.setText("6");
         view.thucHienThemThiSinh();
-
         ThiSinh ts1 = view.model.getThiSinhById(1); 
         System.out.println("");
         System.out.println("Thông tin thí sinh sau khi cập nhật:");
         hienThiThongTinThiSinh(ts1);
-        
         assertEquals("Nguyen Van A", ts1.getTenThiSinh());
         assertEquals(6.0f, ts1.getDiemMon1());
     }
     
     @Test
     void testXoa_Yes() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Quoc Cuong");
-    	// Thêm danh sách Tinh và chọn 1 Tinh
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("19/12/2011");
-    	// Chọn giới tính
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        // Điểm
-        view.textField_Mon1.setText("3.5");
-        view.textField_Mon2.setText("4.0");
-        view.textField_Mon3.setText("5.5");
-        
-        view.thucHienThemThiSinh();
+    	themThiSinh();     
 
         // Đảm bảo thí sinh đã được thêm thành công trước khi xóa
         assertNotNull(view.model.getThiSinhById(1), "Thí sinh không được thêm trước khi test xóa!");
@@ -129,27 +83,13 @@ class TestChucNang {
             }
         };  
         
-//        // Kiểm tra xem thí sinh đã bị xóa khỏi model
+       // Kiểm tra xem thí sinh đã bị xóa khỏi model
           assertNull(model.getThiSinhById(1), "Thí sinh không được xóa khỏi model!");
     }
     
     @Test
     void testXoa_No() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Quoc Cuong NO");
-    	// Thêm danh sách Tinh và chọn 1 Tinh
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("19/12/2011");
-    	// Chọn giới tính
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        // Điểm
-        view.textField_Mon1.setText("3.5");
-        view.textField_Mon2.setText("6.0");
-        view.textField_Mon3.setText("5.5");
-        
-        view.thucHienThemThiSinh();
-
+    	themThiSinh();
         // Đảm bảo thí sinh đã được thêm thành công trước khi xóa
         assertNotNull(view.model.getThiSinhById(1), "Thí sinh không được thêm trước khi test xóa!");
 
@@ -158,15 +98,7 @@ class TestChucNang {
 
         view.table.setRowSelectionInterval(0, 0); // Chọn dòng đầu tiên (dòng của thí sinh)
 
-     
-       
-        
         ThiSinh ts = view.model.getThiSinhById(1);
-//        if (ts != null) {
-//        	System.out.println("");
-//            System.out.println("Dữ liệu thí sinh hàm - testXoa_No : ");
-//            hienThiThongTinThiSinh(ts);
-//        }
 
         // Kiểm tra xem thí sinh đã bị xóa khỏi model
         assertNotNull(view.model.getThiSinhById(1), "Thí sinh không được giữ lại trong model!");
@@ -178,23 +110,9 @@ class TestChucNang {
     
     @Test
     void testHuyBo() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
-    	// Thêm danh sách Tinh và chọn 1 Tinh
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("24/07/2004");
-    	// Chọn giới tính
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        // Điểm
-        view.textField_Mon1.setText("9");
-        view.textField_Mon2.setText("9");
-        view.textField_Mon3.setText("9.5");
-        view.thucHienThemThiSinh();
-    	
+    	themThiSinh();
         view.table.setRowSelectionInterval(0, 0);
         view.hienThiThongTinThiSinhDaChon();
-        
         view.xoaForm();
         
         assertEquals("", view.textField_ID.getText());
@@ -211,19 +129,8 @@ class TestChucNang {
 
     @Test
     void testKhongTimThay() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("24/07/2004");
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        view.textField_Mon1.setText("9.5");
-        view.textField_Mon2.setText("9.0");
-        view.textField_Mon3.setText("9.5");
-        
-        view.thucHienThemThiSinh();
-        
-        view.comboBox_queQuan_timKiem.setSelectedItem("Hà Nội");
+    	themThiSinh();
+        view.comboBox_queQuan_timKiem.setSelectedItem("Thanh Hóa");
         view.thucHienTim();
         DefaultTableModel tableModel = (DefaultTableModel) view.table.getModel();
         assertEquals(0, tableModel.getRowCount(), "Lỗi tìm kiếm");
@@ -231,18 +138,7 @@ class TestChucNang {
     
     @Test
     void testKhongTimThay1() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("24/07/2004");
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        view.textField_Mon1.setText("9.5");
-        view.textField_Mon2.setText("9.0");
-        view.textField_Mon3.setText("9.5");
-        
-        view.thucHienThemThiSinh();
-        
+    	themThiSinh();    
         view.comboBox_queQuan_timKiem.setSelectedItem("Nghệ An");
         view.textField_MaThiSinh_TimKiem.setText("2");
         view.thucHienTim();
@@ -252,17 +148,7 @@ class TestChucNang {
     
     @Test
     void testKhongTimThay2() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("24/07/2004");
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        view.textField_Mon1.setText("9.5");
-        view.textField_Mon2.setText("9.0");
-        view.textField_Mon3.setText("9.5");
-        
-        view.thucHienThemThiSinh();
+    	themThiSinh();
         
         view.comboBox_queQuan_timKiem.setSelectedItem("Hà Nội");
         view.textField_MaThiSinh_TimKiem.setText("1");
@@ -272,17 +158,17 @@ class TestChucNang {
     }
     
     @Test
+    void testKhongTimThay3() {
+    	themThiSinh();
+    	view.textField_MaThiSinh_TimKiem.setText("2");
+        view.thucHienTim();
+        DefaultTableModel tableModel = (DefaultTableModel) view.table.getModel();
+        assertEquals(0, tableModel.getRowCount(), "Lỗi tìm kiếm");
+    }
+    
+    @Test
     void testTimThay() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("24/07/2004");
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        view.textField_Mon1.setText("9.5");
-        view.textField_Mon2.setText("9.0");
-        view.textField_Mon3.setText("9.5");
-        
+    	themThiSinh();
         view.thucHienThemThiSinh();
         
         view.comboBox_queQuan_timKiem.setSelectedItem("Nghệ An");
@@ -293,16 +179,7 @@ class TestChucNang {
     
     @Test
     void testTimThay1() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("24/07/2004");
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        view.textField_Mon1.setText("9.5");
-        view.textField_Mon2.setText("9.0");
-        view.textField_Mon3.setText("9.5");
-        
+    	themThiSinh();
         view.thucHienThemThiSinh();
         
         view.comboBox_queQuan_timKiem.setSelectedItem("Nghệ An");
@@ -314,16 +191,7 @@ class TestChucNang {
     
     @Test
     void testTimThay2() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("24/07/2004");
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        view.textField_Mon1.setText("9.5");
-        view.textField_Mon2.setText("9.0");
-        view.textField_Mon3.setText("9.5");
-        
+    	themThiSinh();
         view.thucHienThemThiSinh();
         
         view.textField_MaThiSinh_TimKiem.setText("1");
@@ -334,16 +202,7 @@ class TestChucNang {
     
     @Test
     void testHuyTim() {
-    	view.textField_ID.setText("1");
-    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
-        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
-    	view.textField_NgaySinh.setText("24/07/2004");
-        view.radioButton_nam.setSelected(true);
-        view.radioButton_nu.setSelected(false);
-        view.textField_Mon1.setText("9.5");
-        view.textField_Mon2.setText("9.0");
-        view.textField_Mon3.setText("9.5");
-        
+    	themThiSinh();
         view.thucHienThemThiSinh();
         
         view.textField_MaThiSinh_TimKiem.setText("2");
@@ -363,5 +222,17 @@ class TestChucNang {
         System.out.println("Điểm môn 1: " + ts.getDiemMon1());
         System.out.println("Điểm môn 2: " + ts.getDiemMon2());
         System.out.println("Điểm môn 3: " + ts.getDiemMon3());
+    }
+    private void themThiSinh() {
+    	view.textField_ID.setText("1");
+    	view.textField_HoVaTen.setText("Nguyen Ba Cuong");
+        view.comboBox_queQuan.setSelectedItem("Nghệ An"); 
+    	view.textField_NgaySinh.setText("24/07/2004");
+        view.radioButton_nam.setSelected(true);
+        view.radioButton_nu.setSelected(false);
+        view.textField_Mon1.setText("9.5");
+        view.textField_Mon2.setText("9.0");
+        view.textField_Mon3.setText("9.5");
+        view.thucHienThemThiSinh();
     }
 }

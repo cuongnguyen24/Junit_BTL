@@ -72,12 +72,16 @@ class ThiSinhTest {
     	// Khởi tạo ngày bằng LocalDate
         LocalDate localDate1 = LocalDate.of(2000, 5, 15);
         LocalDate localDate2 = LocalDate.of(1999, 10, 20);
-        Date ngaySinh1 = Date.from(localDate1.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Date ngaySinh2 = Date.from(localDate2.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date ngaySinh1 = Date.from(localDate1.atStartOfDay
+        		(ZoneId.systemDefault()).toInstant());
+        Date ngaySinh2 = Date.from(localDate2.atStartOfDay
+        		(ZoneId.systemDefault()).toInstant());
         
         // Kiểm tra phương thức equals
-        ThiSinh thiSinh2 = new ThiSinh(1, "Nguyen Van A", new Tinh(1, "Ha Noi"), ngaySinh1, true, 8.5f, 7.5f, 9.0f);
-        ThiSinh thiSinh3 = new ThiSinh(2, "Tran Van B", new Tinh(2, "Hai Phong"), ngaySinh2, false, 6.0f, 7.0f, 8.0f);
+        ThiSinh thiSinh2 = new ThiSinh(1, "Nguyen Van A", new Tinh(1, "Ha Noi"),
+        		ngaySinh1, true, 8.5f, 7.5f, 9.0f);
+        ThiSinh thiSinh3 = new ThiSinh(2, "Tran Van B", new Tinh(2, "Hai Phong"),
+        		ngaySinh2, false, 6.0f, 7.0f, 8.0f);
 
         assertEquals(thiSinh, thiSinh2);
         assertNotEquals(thiSinh, thiSinh3);
@@ -86,7 +90,9 @@ class ThiSinhTest {
     @Test
     void testToString() {
         // Kiểm tra phương thức toString
-        String expected = "ThiSinh [maThiSinh=1, tenThiSinh=Nguyen Van A, queQuan=Ha Noi, ngaySinh=15/05/2000, gioiTinh=true, diemMon1=8.5, diemMon2=7.5, diemMon3=9.0]";
+        String expected = "ThiSinh [maThiSinh=1, tenThiSinh=Nguyen Van A,"
+        		+ " queQuan=Ha Noi, ngaySinh=15/05/2000, gioiTinh=true,"
+        		+ " diemMon1=8.5, diemMon2=7.5, diemMon3=9.0]";
         assertEquals(expected, thiSinh.toString());
     }
 }
