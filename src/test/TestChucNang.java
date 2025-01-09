@@ -24,11 +24,12 @@ class TestChucNang {
      	model = new QLSVModel();
         controller = new QLSVController(view);
         ts = new ThiSinh();
+        themThiSinh();
     }
     
     @Test
     void testThemThiSinh(){
-    	themThiSinh();
+    	//themThiSinh();
         ThiSinh ts = view.model.getThiSinhById(1); // Giả sử có phương thức này để lấy theo ID
         System.out.println("--------------TEST THEM THI SINH---------------");
         System.out.println("Thông tin thí sinh:");
@@ -47,11 +48,12 @@ class TestChucNang {
     
     @Test
     void testCapNhat() {
-    	themThiSinh();
+    	//themThiSinh();
         ThiSinh ts = view.model.getThiSinhById(1);
         System.out.println("--------------TEST CAP NHAT---------------");
         System.out.println("Thông tin thí sinh trước khi cập nhật:");
         hienThiThongTinThiSinh(ts);
+        
         view.table.setRowSelectionInterval(0, 0);
         view.hienThiThongTinThiSinhDaChon();
         view.textField_HoVaTen.setText("Nguyen Van A");
@@ -67,7 +69,7 @@ class TestChucNang {
     
     @Test
     void testXoa_Yes() {
-    	themThiSinh();     
+    	//themThiSinh();     
 
         // Đảm bảo thí sinh đã được thêm thành công trước khi xóa
         assertNotNull(view.model.getThiSinhById(1), "Thí sinh không được thêm trước khi test xóa!");
@@ -89,7 +91,7 @@ class TestChucNang {
     
     @Test
     void testXoa_No() {
-    	themThiSinh();
+    	//themThiSinh();
         // Đảm bảo thí sinh đã được thêm thành công trước khi xóa
         assertNotNull(view.model.getThiSinhById(1), "Thí sinh không được thêm trước khi test xóa!");
 
@@ -110,7 +112,7 @@ class TestChucNang {
     
     @Test
     void testHuyBo() {
-    	themThiSinh();
+    	//themThiSinh();
         view.table.setRowSelectionInterval(0, 0);
         view.hienThiThongTinThiSinhDaChon();
         view.xoaForm();
@@ -129,7 +131,7 @@ class TestChucNang {
 
     @Test
     void testKhongTimThay() {
-    	themThiSinh();
+    	//themThiSinh();
         view.comboBox_queQuan_timKiem.setSelectedItem("Thanh Hóa");
         view.thucHienTim();
         DefaultTableModel tableModel = (DefaultTableModel) view.table.getModel();
@@ -138,7 +140,7 @@ class TestChucNang {
     
     @Test
     void testKhongTimThay1() {
-    	themThiSinh();    
+    	//themThiSinh();    
         view.comboBox_queQuan_timKiem.setSelectedItem("Nghệ An");
         view.textField_MaThiSinh_TimKiem.setText("2");
         view.thucHienTim();
@@ -148,7 +150,7 @@ class TestChucNang {
     
     @Test
     void testKhongTimThay2() {
-    	themThiSinh();
+    	//themThiSinh();
         
         view.comboBox_queQuan_timKiem.setSelectedItem("Hà Nội");
         view.textField_MaThiSinh_TimKiem.setText("1");
@@ -159,7 +161,7 @@ class TestChucNang {
     
     @Test
     void testKhongTimThay3() {
-    	themThiSinh();
+    	//themThiSinh();
     	view.textField_MaThiSinh_TimKiem.setText("2");
         view.thucHienTim();
         DefaultTableModel tableModel = (DefaultTableModel) view.table.getModel();
@@ -168,7 +170,7 @@ class TestChucNang {
     
     @Test
     void testTimThay() {
-    	themThiSinh();
+    	//themThiSinh();
         view.thucHienThemThiSinh();
         
         view.comboBox_queQuan_timKiem.setSelectedItem("Nghệ An");
@@ -179,7 +181,7 @@ class TestChucNang {
     
     @Test
     void testTimThay1() {
-    	themThiSinh();
+    	//themThiSinh();
         view.thucHienThemThiSinh();
         
         view.comboBox_queQuan_timKiem.setSelectedItem("Nghệ An");
@@ -191,7 +193,7 @@ class TestChucNang {
     
     @Test
     void testTimThay2() {
-    	themThiSinh();
+    	//themThiSinh();
         view.thucHienThemThiSinh();
         
         view.textField_MaThiSinh_TimKiem.setText("1");
@@ -202,8 +204,8 @@ class TestChucNang {
     
     @Test
     void testHuyTim() {
-    	themThiSinh();
-        view.thucHienThemThiSinh();
+    	//themThiSinh();
+        //view.thucHienThemThiSinh();
         
         view.textField_MaThiSinh_TimKiem.setText("2");
         view.thucHienTim();
